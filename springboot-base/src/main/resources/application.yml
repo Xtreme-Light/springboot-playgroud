@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: springboot-play-ground
+  profiles:
+    group:
+      # 激活方式，通过 --spring.profiles.active=dev,就可以激活这一个profiles组合，即同时激活dev,devDb,devMq三个
+      dev:
+        - "devDb"
+        - "devMq"
+  # 在springboot 2.4 之后profile的配置和以往的有些不同，主要是include那边
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+logging:
+  pattern:
+    # logback有部分变量比如CONSOLE_LOG_PATTERN是会被spring使用默认值设置的。具体的spring变量和log相关变量之间的关系参照如下的链接
+    # https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging.log-format
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${logging.pattern.level:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint} %clr([%13.13t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${logging.exception-conversion-word:%wEx{full}}"
+
+# spring.main.log-startup-info会被映射为SPRING_MAIN_LOGSTARTUPINFO，也就是说spring的key和对应的环境变量是对应的
+
+# 下面展示了通过on-profile来判断，如果是dev的话，那么key2会被加入，key1会被覆盖
+my:
+  map:
+    key1:
+      name: "my name 1"
+      description: "my description 1"
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+my:
+  map:
+    key1:
+      name: "dev name 1"
+    key2:
+      name: "dev name 2"
+      description: "dev description 2"

@@ -1,0 +1,6 @@
+spring:
+  config:
+    # 这里的配置和springboot2.4之前的配置有很大不同，springboot2.4之前主要是通过include来包含自定义的配置，而在再这之后，是通过profile
+    # group来配置的，详情参见：https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles.groups
+    # 通过如下配置，来导入相关的配置文件
+    import: "classpath:playground-${SPRING_PROFILES_ACTIVE:dev}.yml"

@@ -1,0 +1,6 @@
+# 通过使用spring的profile可以很好的让业务配置和系统配置分离
+# 值得注意的是spring推荐使用kebab case 也就是烤肉式来声明你的变量
+# 因为如果变量是playground.item-price，那么spring会找到playground.item-price，playground.itemPrice
+# 包括系统级别变量PLAYGROUND_ITEMPRICE,也就是说烤肉式变量写好后，可以去找到烤肉式，驼峰式和大蛇式三中命名风格的变量
+# 如果仅仅使用itmePrice的方式来声明变量，那么spring仅仅会去找到itemPrice变量而烤肉式和大蛇式都不会去寻找
+# https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.typesafe-configuration-properties.vs-value-annotation
